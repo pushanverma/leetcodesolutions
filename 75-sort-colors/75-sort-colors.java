@@ -13,21 +13,21 @@ class Solution
         int j=0;
         int k =nums.length-1;
         
-        while(j<=k)
+        while(i<=k)
         {
-            if(nums[j]==0)
+            if(nums[i]==0)
             {
                 swap(nums,i,j);
                 i++;
                 j++;
             }
-            else if(nums[j]==1)
+            else if(nums[i]==1)
             {
-                j++;
+                i++;
             }
             else
             {
-               swap(nums,j,k);
+               swap(nums,i,k);
                 k--;
             }
         }
