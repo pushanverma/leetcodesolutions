@@ -1,24 +1,22 @@
 class Solution {
     public int brokenCalc(int startValue, int target) 
     {
-    int count=0;
-        while(target>startValue)
+        if(target<=startValue) //base condition
         {
-            //when target is even 
-            if(target%2==0)
-            {
-                target=target/2;
-            }
-            
-            //when target is odd
-            else
-            {
-                target =target+1;
-            }
-            count++;
+            return startValue-target;
         }
-        //if target is less than or equal to then
         
-        return count+(startValue-target);
+       
+            if(target%2==0) //if target is even 
+             {
+            return 1+brokenCalc(startValue,target/2);
+             }
+            else // if target is odd
+            {
+            return 1+brokenCalc(startValue,target+1);
+            }
+    
+      
+                
     }
 }
