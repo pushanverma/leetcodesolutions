@@ -14,38 +14,41 @@
  * }
  */
 class Solution {
-    class Pair
-    {
-        int height;
-        int diameter;
+//     class Pair
+//     {
+//         int height;
+//         int diameter;
         
-        Pair()
-        {
+//         Pair()
+//         {
             
-        }
-        Pair(int height, int diameter)
-        {
-            this.height =height;
-            this.diameter=diameter;
-        }
+//         }
+//         Pair(int height, int diameter)
+//         {
+//             this.height =height;
+//             this.diameter=diameter;
+//         }
             
-    }
+//     }
     
-    public Pair diameter(TreeNode node)
+    public int[] diameter(TreeNode node)
     {
         if(node==null)
         {
-            return new Pair(-1,0);
+            return new int[]{-1,0};
         }
+            
+        //0th position is -height 
+        //1st position is diameter
+        int[] leftans =diameter(node.left);
+        int[] rightans =diameter(node.right);
         
-        Pair leftans =diameter(node.left);
-        Pair rightans =diameter(node.right);
+        int []mypair =new int[2];
         
-        Pair mypair=new Pair();
         
-        mypair.height=Math.max(leftans.height,rightans.height)+1;
-        int acrossNode =leftans.height+rightans.height+2;
-         mypair.diameter=Math.max(acrossNode,Math.max(leftans.diameter,rightans.diameter));
+        mypair[0]=Math.max(leftans[0],rightans[0])+1;
+        int acrossNode =leftans[0]+rightans[0]+2;
+         mypair[1]=Math.max(acrossNode,Math.max(leftans[1],rightans[1]));
         
         return mypair;
     }
@@ -53,9 +56,8 @@ class Solution {
     
     public int diameterOfBinaryTree(TreeNode root) 
     {
-        Pair ans =diameter(root);
-        return ans.diameter;
-        
+        int []ans =diameter(root);
+        return ans[1];
         
     }
 }
