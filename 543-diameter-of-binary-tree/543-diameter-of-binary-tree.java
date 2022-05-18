@@ -14,40 +14,48 @@
  * }
  */
 class Solution {
+    class Pair
+    {
+        int height;
+        int diameter;
+        
+        Pair()
+        {
+            
+        }
+        Pair(int height, int diameter)
+        {
+            this.height =height;
+            this.diameter=diameter;
+        }
+            
+    }
     
-    public int Height(TreeNode node)
+    public Pair diameter(TreeNode node)
     {
         if(node==null)
         {
-            return -1;
+            return new Pair(-1,0);
         }
-        int lh=Height(node.left);
-        int rh=Height(node.right);
-        int myH=Math.max(lh,rh)+1;
-        return myH;
+        
+        Pair leftans =diameter(node.left);
+        Pair rightans =diameter(node.right);
+        
+        Pair mypair=new Pair();
+        
+        mypair.height=Math.max(leftans.height,rightans.height)+1;
+        int acrossNode =leftans.height+rightans.height+2;
+         mypair.diameter=Math.max(acrossNode,Math.max(leftans.diameter,rightans.diameter));
+        
+        return mypair;
     }
     
-    //Minimum Height is -1 and Minimun diameter is 0 , therefore 
-    //base condition mei wahi likha hai 
+    
     public int diameterOfBinaryTree(TreeNode root) 
     {
-        if(root==null)
-        {
-            return 0;
-        }
-    
-        int ld=diameterOfBinaryTree(root.left); //acroos only left side
-        int rd=diameterOfBinaryTree(root.right); //across only right side
+        Pair ans =diameter(root);
+        return ans.diameter;
         
-        int lh=Height(root.left);
-        int rh=Height(root.right);
         
-        int acrossNode =lh+rh+2; //across node 
-        
-        // since diameter can be pn any side (i.e across node / left/right , so comparing )
-        
-        int myDia =Math.max(acrossNode,Math.max(ld,rd));
-        
-        return myDia;
     }
 }
