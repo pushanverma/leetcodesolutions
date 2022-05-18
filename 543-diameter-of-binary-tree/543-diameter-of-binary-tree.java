@@ -31,33 +31,39 @@ class Solution {
             
 //     }
     
-    public int[] diameter(TreeNode node)
+    // -(int)1e9 is reffered to -infinity and (int)1e9 referred to as +infinity 
+     static int ans =-(int)1e9;
+    
+    
+    public int diameter(TreeNode node)
     {
         if(node==null)
         {
-            return new int[]{-1,0};
+            return -1;
         }
             
         //0th position is -height 
         //1st position is diameter
-        int[] leftans =diameter(node.left);
-        int[] rightans =diameter(node.right);
+        int leftHeight =diameter(node.left);
+        int rightHeight=diameter(node.right);
         
-        int []mypair =new int[2];
+        ans =Math.max(ans,leftHeight+rightHeight+2);
+        // int mypair =new int[2];
+        int myHeight =Math.max(leftHeight,rightHeight)+1;
         
+        // mypair[0]=Math.max(leftans[0],rightans[0])+1;
+        // int acrossNode =leftans[0]+rightans[0]+2;
+        //  mypair[1]=Math.max(acrossNode,Math.max(leftans[1],rightans[1]));
         
-        mypair[0]=Math.max(leftans[0],rightans[0])+1;
-        int acrossNode =leftans[0]+rightans[0]+2;
-         mypair[1]=Math.max(acrossNode,Math.max(leftans[1],rightans[1]));
-        
-        return mypair;
+        return myHeight;
     }
     
     
     public int diameterOfBinaryTree(TreeNode root) 
     {
-        int []ans =diameter(root);
-        return ans[1];
+        ans =-(int)1e9;
+        diameter(root);
+        return ans;
         
     }
 }
