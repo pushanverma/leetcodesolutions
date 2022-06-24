@@ -22,25 +22,21 @@ class GFG {
 //User function Template for Java
 
 class Solution {
-    int isPalindrome(String str) 
+    int isPalindrome(String S) 
     {
         // code here
-        int i=0;
-        int j=str.length()-1;
-        while(i<=j)
+        String revStr="";
+        for(int i=S.length()-1;i>=0;i--)
         {
-            char ch1=str.charAt(i);
-            char ch2=str.charAt(j);
-            if(ch1 !=ch2)
-            {
-                return 0;
-            }
-            else
-            {
-                i++;
-                j--;
-            }
+            revStr+=S.charAt(i);
         }
-        return 1;
+        if(revStr.equals(S))
+        {
+            return 1;
+        }
+        else 
+        {
+            return 0;
+        }
     }
 };
